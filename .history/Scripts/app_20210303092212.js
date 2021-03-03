@@ -28,21 +28,9 @@
         //content injection
         $("a").on("click", function()
         {
-          $(`#${activeLink}`).removeClass("active"); //removes highlighted link
           activeLink = $(this).attr("id");
           loadContent(activeLink);
-          $(`#${activeLink}`).addClass("active"); // applies highlighted link to new page
-
-
-          history.pushState({},"",activeLink);   //replaces the url in the browser
-
-      
-        });
-
-        //Make is look like each nav item is an active link
-        $("a").on("mouseover", function(){
-          
-          $(this).css('cursor','pointer');
+          $(`#${activeLink}`).addClass("active");
         });
 
       });
@@ -71,8 +59,7 @@
 
     function displayHome()
     {
-        
-        activeLink="home";
+      activeLink="home";
         // inject the header
         loadHeader(activeLink);
         // inject the content

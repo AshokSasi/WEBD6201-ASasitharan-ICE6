@@ -9,11 +9,6 @@
 ((core) =>
 {
 
-    /**
-     *Inject the navigation bar into the header element and highlight the active link
-     *
-     * @param {string} pageName
-     */
     function loadHeader(pageName)
     {
       $.get("./Views/components/header.html", function(data)
@@ -22,29 +17,6 @@
         
         // highlight the active link
         $(`#${pageName}`).addClass("active");
-
-        //loop through each anchor tag in the unordered list and
-        //add an event listener / handler to allow for 
-        //content injection
-        $("a").on("click", function()
-        {
-          $(`#${activeLink}`).removeClass("active"); //removes highlighted link
-          activeLink = $(this).attr("id");
-          loadContent(activeLink);
-          $(`#${activeLink}`).addClass("active"); // applies highlighted link to new page
-
-
-          history.pushState({},"",activeLink);   //replaces the url in the browser
-
-      
-        });
-
-        //Make is look like each nav item is an active link
-        $("a").on("mouseover", function(){
-          
-          $(this).css('cursor','pointer');
-        });
-
       });
     }
 
@@ -71,12 +43,10 @@
 
     function displayHome()
     {
-        
-        activeLink="home";
         // inject the header
-        loadHeader(activeLink);
+        loadHeader();
         // inject the content
-        loadContent(activeLink);
+        loadContent();
         // inject the footer
        loadFooter();
     }

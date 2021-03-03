@@ -33,16 +33,12 @@
           loadContent(activeLink);
           $(`#${activeLink}`).addClass("active"); // applies highlighted link to new page
 
+          history.pushState({},"",activeLink)
 
-          history.pushState({},"",activeLink);   //replaces the url in the browser
-
-      
+          history.replaceState({},"",activeLink); //replaces the url in the browser
         });
-
-        //Make is look like each nav item is an active link
         $("a").on("mouseover", function(){
-          
-          $(this).css('cursor','pointer');
+
         });
 
       });

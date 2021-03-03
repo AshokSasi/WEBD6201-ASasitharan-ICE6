@@ -41,6 +41,7 @@
 
         //Make is look like each nav item is an active link
         $("a").on("mouseover", function(){
+
           
           $(this).css('cursor','pointer');
         });

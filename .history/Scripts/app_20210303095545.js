@@ -45,6 +45,11 @@
           $(this).css('cursor','pointer');
         });
 
+        $("a").on("mouseout", function(){
+          
+          $(this).css('cursor','crosshair');
+        });
+
       });
     }
 

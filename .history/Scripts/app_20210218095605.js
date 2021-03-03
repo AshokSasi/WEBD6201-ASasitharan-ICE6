@@ -8,77 +8,56 @@
 
 ((core) =>
 {
-
-    /**
-     *Inject the navigation bar into the header element and highlight the active link
-     *
-     * @param {string} pageName
-     */
-    function loadHeader(pageName)
-    {
-      $.get("./Views/components/header.html", function(data)
-      {
-        $("header").html(data); // load the nav bar
-        
-        // highlight the active link
-        $(`#${pageName}`).addClass("active");
-
-        //loop through each anchor tag in the unordered list and
-        //add an event listener / handler to allow for 
-        //content injection
-        $("a").on("click", function()
-        {
-          $(`#${activeLink}`).removeClass("active"); //removes highlighted link
-          activeLink = $(this).attr("id");
-          loadContent(activeLink);
-          $(`#${activeLink}`).addClass("active"); // applies highlighted link to new page
-
-
-          history.pushState({},"",activeLink);   //replaces the url in the browser
-
-      
-        });
-
-        //Make is look like each nav item is an active link
-        $("a").on("mouseover", function(){
-          
-          $(this).css('cursor','pointer');
-        });
-
-      });
-    }
-
-    /**
-     *Inject page content in the main element
-     *
-     * @param {string} pageName
-     */
-    function loadContent(pageName)
-    {
-      $.get(`./Views/content/${pageName}.html`, function(data)
-      {
-        $("main").html(data);
-      });
-    }
-
-    function loadFooter()
-    {
-      $.get("./Views/components/footer.html", function(data)
-      {
-        $("footer").html(data);
-      });
-    }
-
     function displayHome()
     {
+        let paragraphOneText =
+          "This is a simple site to demonstrate DOM Manipulation for ICE 1";
+
+        let paragraphOneElement = document.getElementById("paragraphOne");
+
+        paragraphOneElement.textContent = paragraphOneText;
+        paragraphOneElement.className = "fs-5";
+
+        // Step 1. document.createElement
+        let newParagraph = document.createElement("p");
+        // Step 2. configure the element
+        newParagraph.setAttribute("id", "paragraphTwo");
+        newParagraph.textContent = "...And this is paragraph two";
+        // Step 3. select the parent element
+        let mainContent = document.getElementsByTagName("main")[0];
+        // Step 4. Add / Insert the element
+        mainContent.appendChild(newParagraph);
+
+        newParagraph.className = "fs-6";
+
+        // another way of injecting content
+        let paragraphDiv = document.createElement("div");
+        let paragraphThree = `<p id="paragraphThree" class="fs-7 fw-bold">And this is the Third Paragraph</p>`;
+        paragraphDiv.innerHTML = paragraphThree;
+
+        // insertions
+
+        // example of inserting before a node
+        //newParagraph.before(paragraphDiv);
+
+        // example of inserting after a node
+        newParagraph.after(paragraphDiv);
+
+        // deletions
+
+        // example of removing a single element
+        //paragraphOneElement.remove();
+
+        // example of removeChild
+        mainContent.removeChild(paragraphOneElement);
+
+        // update / modification
+        //mainContent.firstElementChild.textContent = "Welcome Home!";
+
+        mainContent.innerHTML = `<h1 id="firstHeading">Welcome to WEBD6201 - Lab 1</h1>
+         <p id="paragraphOne" class="fs-3 fw-bold">This is my first Paragraph</p>
+        `;
         
-        activeLink="home";
-        // inject the header
-        loadHeader(activeLink);
-        // inject the content
-        loadContent(activeLink);
-        // inject the footer
-       loadFooter();
     }
 
     function displayAbout()

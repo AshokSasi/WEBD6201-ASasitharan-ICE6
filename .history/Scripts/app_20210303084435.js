@@ -8,77 +8,17 @@
 
 ((core) =>
 {
-
-    /**
-     *Inject the navigation bar into the header element and highlight the active link
-     *
-     * @param {string} pageName
-     */
-    function loadHeader(pageName)
-    {
-      $.get("./Views/components/header.html", function(data)
-      {
-        $("header").html(data); // load the nav bar
-        
-        // highlight the active link
-        $(`#${pageName}`).addClass("active");
-
-        //loop through each anchor tag in the unordered list and
-        //add an event listener / handler to allow for 
-        //content injection
-        $("a").on("click", function()
-        {
-          $(`#${activeLink}`).removeClass("active"); //removes highlighted link
-          activeLink = $(this).attr("id");
-          loadContent(activeLink);
-          $(`#${activeLink}`).addClass("active"); // applies highlighted link to new page
-
-
-          history.pushState({},"",activeLink);   //replaces the url in the browser
-
-      
-        });
-
-        //Make is look like each nav item is an active link
-        $("a").on("mouseover", function(){
-          
-          $(this).css('cursor','pointer');
-        });
-
-      });
-    }
-
-    /**
-     *Inject page content in the main element
-     *
-     * @param {string} pageName
-     */
-    function loadContent(pageName)
-    {
-      $.get(`./Views/content/${pageName}.html`, function(data)
-      {
-        $("main").html(data);
-      });
-    }
-
-    function loadFooter()
-    {
-      $.get("./Views/components/footer.html", function(data)
-      {
-        $("footer").html(data);
-      });
-    }
-
     function displayHome()
     {
-        
-        activeLink="home";
         // inject the header
-        loadHeader(activeLink);
+        $.get("./Views/components/header.html", function(data)
+        {
+          $("header").html(data);
+        });
         // inject the content
-        loadContent(activeLink);
+
         // inject the footer
-       loadFooter();
+        
     }
 
     function displayAbout()

@@ -183,8 +183,6 @@
 
     function displayContactList() 
     {
-      //dont allow visitors to enter
-      authGuard();
         // toggle login/logout
         toggleLogin(); 
       if (localStorage.length > 0) 
@@ -399,7 +397,7 @@
       }
     }
 
-    function authGuard()
+    function AuthGuard()
     {
         // check if the user is not logged in
     if(!sessionStorage.getItem("user"))

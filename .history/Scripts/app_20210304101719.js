@@ -183,8 +183,6 @@
 
     function displayContactList() 
     {
-      //dont allow visitors to enter
-      authGuard();
         // toggle login/logout
         toggleLogin(); 
       if (localStorage.length > 0) 
@@ -378,7 +376,7 @@
           location.href = "/login";
         });
 
-          //Make is look like each logout is an active link
+          //Make is look like each nav item is an active link
           $("#logout").on("mouseover", function(){
           
             $(this).css('cursor','pointer');
@@ -397,16 +395,6 @@
          ` <a id="login" class="nav-link" aria-current="page"><i class="fas fa-sign-in-alt"></i> Login</a>`
           );
       }
-    }
-
-    function authGuard()
-    {
-        // check if the user is not logged in
-    if(!sessionStorage.getItem("user"))
-    {
-    // redirect back to login page
-    location.href = "/login";
-    }
     }
 
     function ActiveLinkCallBack(activeLink)

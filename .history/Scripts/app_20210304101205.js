@@ -183,10 +183,6 @@
 
     function displayContactList() 
     {
-      //dont allow visitors to enter
-      authGuard();
-        // toggle login/logout
-        toggleLogin(); 
       if (localStorage.length > 0) 
       {
 
@@ -330,8 +326,8 @@
 
             // hide any error message
             messageArea.removeAttr("class").hide();
-
-         
+            // toggle login/logout
+            toggleLogin();
 
             // redirect user to secure area - contact-list.html
             location.href = "/contact-list";
@@ -377,13 +373,6 @@
           // redirect back to login
           location.href = "/login";
         });
-
-          //Make is look like each logout is an active link
-          $("#logout").on("mouseover", function(){
-          
-            $(this).css('cursor','pointer');
-          });
-  
        
         $(`<li class="nav-item">
         <a id="contactListLink" class="nav-link" aria-current="page" href="/contact-list"><i class="fas fa-users fa-lg"></i> Contact List</a>
@@ -397,16 +386,6 @@
          ` <a id="login" class="nav-link" aria-current="page"><i class="fas fa-sign-in-alt"></i> Login</a>`
           );
       }
-    }
-
-    function authGuard()
-    {
-        // check if the user is not logged in
-    if(!sessionStorage.getItem("user"))
-    {
-    // redirect back to login page
-    location.href = "/login";
-    }
     }
 
     function ActiveLinkCallBack(activeLink)

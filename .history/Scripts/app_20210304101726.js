@@ -183,8 +183,6 @@
 
     function displayContactList() 
     {
-      //dont allow visitors to enter
-      authGuard();
         // toggle login/logout
         toggleLogin(); 
       if (localStorage.length > 0) 
@@ -397,16 +395,6 @@
          ` <a id="login" class="nav-link" aria-current="page"><i class="fas fa-sign-in-alt"></i> Login</a>`
           );
       }
-    }
-
-    function authGuard()
-    {
-        // check if the user is not logged in
-    if(!sessionStorage.getItem("user"))
-    {
-    // redirect back to login page
-    location.href = "/login";
-    }
     }
 
     function ActiveLinkCallBack(activeLink)

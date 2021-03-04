@@ -183,8 +183,7 @@
 
     function displayContactList() 
     {
-      //dont allow visitors to enter
-      authGuard();
+        authGuard();
         // toggle login/logout
         toggleLogin(); 
       if (localStorage.length > 0) 

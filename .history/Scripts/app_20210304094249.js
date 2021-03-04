@@ -30,7 +30,7 @@
         {
           $(`#${router.ActiveLink}`).removeClass("active"); //removes highlighted link
           router.ActiveLink = $(this).attr("id");
-          loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+          loadContent(router.ActiveLink);
           $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
 
 
@@ -59,11 +59,9 @@
       $.get(`./Views/content/${pageName}.html`, function(data)
       {
         $("main").html(data);
-
-        callback();
       });
 
-      
+      callback();
     }
 
     function loadFooter()
@@ -76,7 +74,8 @@
 
     function displayHome()
     {
-      console.log("Home Page!!");
+        
+
        
     }
 
@@ -216,7 +215,7 @@
         contactList.innerHTML = data;
 
         $("button.edit").on("click", function(){
-          location.href = "/edit#" + $(this).val();
+          location.href = "edit.html#" + $(this).val();
          });
 
          $("button.delete").on("click", function(){
@@ -224,12 +223,12 @@
            {
             localStorage.removeItem($(this).val());
            }
-           location.href = "/contact-list"; // refresh the page
+           location.href = "contact-list.html"; // refresh the page
          });
 
          $("#addButton").on("click", function() 
          {
-          location.href = "/edit";
+          location.href = "edit.html";
          });
       }
     }
@@ -280,7 +279,7 @@
           localStorage.setItem(key, contact.serialize());
 
           // return to the contact list
-          location.href = "/contact-list";
+          location.href = "contact-list.html";
           
         });
    
@@ -288,7 +287,7 @@
       $("#cancelButton").on("click", function()
       {
         // return to the contact list
-        location.href = "/contact-list";
+        location.href = "contact-list.html";
       });
     }
 
@@ -328,7 +327,7 @@
             messageArea.removeAttr("class").hide();
 
             // redirect user to secure area - contact-list.html
-            location.href = "/contact-list";
+            location.href = "contact-list.html";
           }
           else
           {
@@ -344,7 +343,7 @@
         // clear the login form
         document.forms[0].reset();
         // return to the home page
-        location.href = "/home";
+        location.href = "index.html";
       });
     }
 
@@ -359,8 +358,8 @@
       if(sessionStorage.getItem("user"))
       {
         // swap out the login link for logout
-        $("#loginListItem").html(
-        `<a id="logout" class="nav-link" aria-current="page"><i class="fas fa-sign-out-alt"></i> Logout</a>`
+        $("#login").html(
+        `<a id="logout" class="nav-link" aria-current="page" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>`
         );
 
         $("#logout").on("click", function()
@@ -369,20 +368,13 @@
           sessionStorage.clear();
 
           // redirect back to login
-          location.href = "/login";
+          location.href = "login.html";
         });
        
         $(`<li class="nav-item">
-        <a id="contactListLink" class="nav-link" aria-current="page" href="/contact-list"><i class="fas fa-users fa-lg"></i> Contact List</a>
-      </li>`).insertBefore("#loginListItem");
+        <a id="contactListLink" class="nav-link" aria-current="page" href="contact-list.html"><i class="fas fa-users fa-lg"></i> Contact List</a>
+      </li>`).insertBefore("#login");
       
-      }
-      else
-      {
-        // swap out the login link for logout
-        $("#loginListItem").html(
-         ` <a id="login" class="nav-link" aria-current="page"><i class="fas fa-sign-in-alt"></i> Login</a>`
-          );
       }
     }
 
@@ -391,36 +383,31 @@
       switch (activeLink) 
         {
           case "home":
-         return displayHome;
-
+              displayHome();
+            break;
           case "about":
-             return displayAbout;
-        
+              displayAbout();
+            break;
           case "projects":
-            return displayProjects;
-       
+              displayProjects();
+            break;
           case "services":
-            return displayServices;
-           
+              displayServices();
+            break;
           case "contact":
-            return displayContact;
-       
+              displayContact();
+            break;
           case "contact-list":
-            return displayContactList;
-    
+            displayContactList();
+            break;
           case "edit":
-            return displayEdit;
-         
+            displayEdit();
+            break;
           case "login":
-            return displayLogin;
-          
+            displayLogin();
+          break;
           case "register":
-            return displayRegister;
-
-            case "404":
-              return display404();
-        default:
-          console.error("ERROR: callback does not exist: " + activeLink);
+            displayRegister();
           break;
         }
     }
@@ -432,12 +419,42 @@
        // inject the header
        loadHeader(router.ActiveLink);
        // inject the content
-       loadContent(router.ActiveLink,ActiveLinkCallBack(router.ActiveLink));
+       loadContent(router.ActiveLink);
        // inject the footer
        loadFooter();
 
 
-      
+        /* switch (document.title) 
+        {
+          case "Home":
+              displayHome();
+            break;
+          case "About":
+              displayAbout();
+            break;
+          case "Projects":
+              displayProjects();
+            break;
+          case "Services":
+              displayServices();
+            break;
+          case "Contact":
+              displayContact();
+            break;
+          case "Contact-List":
+            displayContactList();
+            break;
+          case "Edit":
+            displayEdit();
+            break;
+          case "Login":
+            displayLogin();
+          break;
+          case "Register":
+            displayRegister();
+          break;
+        }
+ */
         // toggle login/logout
        toggleLogin();
         

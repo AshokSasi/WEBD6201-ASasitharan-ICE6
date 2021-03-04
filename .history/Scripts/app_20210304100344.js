@@ -360,7 +360,7 @@
       {
         // swap out the login link for logout
         $("#loginListItem").html(
-        `<a id="logout" class="nav-link" aria-current="page"><i class="fas fa-sign-out-alt"></i> Logout</a>`
+        `<a id="logout" class="nav-link" aria-current="page" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>`
         );
 
         $("#logout").on("click", function()
@@ -381,7 +381,7 @@
       {
         // swap out the login link for logout
         $("#loginListItem").html(
-         ` <a id="login" class="nav-link" aria-current="page"><i class="fas fa-sign-in-alt"></i> Login</a>`
+          <a id="login" class="nav-link" aria-current="page"><i class="fas fa-sign-in-alt"></i> Login</a>
           );
       }
     }
@@ -419,9 +419,7 @@
 
             case "404":
               return display404();
-        default:
-          console.error("ERROR: callback does not exist: " + activeLink);
-          break;
+        
         }
     }
 

@@ -21,7 +21,7 @@
         {
             this.m_activeLink = link;
         }
- 
+ \
         //Public Methods
         /**
          *Adds a new route to the routing table
@@ -90,21 +90,4 @@
 let router = new core.Router();
 
 router.AddTable(["/","/home", "/about","/services","/contact","/contact-list","/projects","/register","/login","/edit"]);
-
-let route = location.pathname;
-
-if(router.Find(route) > -1)
-{
-    if(route == "/")
-    {
-        router.ActiveLink = "home";
-    }
-    else
-    {
-        router.ActiveLink = route.substring(1);
-    }
-}
-else
-{
-    router.ActiveLink ="404";
-}
+console.log(router.ToString());

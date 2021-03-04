@@ -91,20 +91,11 @@ let router = new core.Router();
 
 router.AddTable(["/","/home", "/about","/services","/contact","/contact-list","/projects","/register","/login","/edit"]);
 
-let route = location.pathname;
-
-if(router.Find(route) > -1)
+if(router.Find(location.pathname) > -1)
 {
-    if(route == "/")
-    {
-        router.ActiveLink = "home";
-    }
-    else
-    {
-        router.ActiveLink = route.substring(1);
-    }
+    console.log("route found!!");
 }
 else
 {
-    router.ActiveLink ="404";
+    console.log("route not found");
 }

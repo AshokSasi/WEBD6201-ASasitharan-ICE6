@@ -59,11 +59,9 @@
       $.get(`./Views/content/${pageName}.html`, function(data)
       {
         $("main").html(data);
-
-        callback();
       });
 
-      
+      callback();
     }
 
     function loadFooter()
@@ -76,7 +74,8 @@
 
     function displayHome()
     {
-      console.log("Home Page!!");
+        
+
        
     }
 
@@ -216,7 +215,7 @@
         contactList.innerHTML = data;
 
         $("button.edit").on("click", function(){
-          location.href = "/edit#" + $(this).val();
+          location.href = "edit.html#" + $(this).val();
          });
 
          $("button.delete").on("click", function(){
@@ -224,12 +223,12 @@
            {
             localStorage.removeItem($(this).val());
            }
-           location.href = "/contact-list"; // refresh the page
+           location.href = "contact-list.html"; // refresh the page
          });
 
          $("#addButton").on("click", function() 
          {
-          location.href = "/edit";
+          location.href = "edit.html";
          });
       }
     }
@@ -280,7 +279,7 @@
           localStorage.setItem(key, contact.serialize());
 
           // return to the contact list
-          location.href = "/contact-list";
+          location.href = "contact-list.html";
           
         });
    
@@ -288,7 +287,7 @@
       $("#cancelButton").on("click", function()
       {
         // return to the contact list
-        location.href = "/contact-list";
+        location.href = "contact-list.html";
       });
     }
 
@@ -328,7 +327,7 @@
             messageArea.removeAttr("class").hide();
 
             // redirect user to secure area - contact-list.html
-            location.href = "/contact-list";
+            location.href = "contact-list.html";
           }
           else
           {
@@ -344,7 +343,7 @@
         // clear the login form
         document.forms[0].reset();
         // return to the home page
-        location.href = "/home";
+        location.href = "index.html";
       });
     }
 
@@ -359,8 +358,8 @@
       if(sessionStorage.getItem("user"))
       {
         // swap out the login link for logout
-        $("#loginListItem").html(
-        `<a id="logout" class="nav-link" aria-current="page"><i class="fas fa-sign-out-alt"></i> Logout</a>`
+        $("#login").html(
+        `<a id="logout" class="nav-link" aria-current="page" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>`
         );
 
         $("#logout").on("click", function()
@@ -369,20 +368,13 @@
           sessionStorage.clear();
 
           // redirect back to login
-          location.href = "/login";
+          location.href = "login.html";
         });
        
         $(`<li class="nav-item">
-        <a id="contactListLink" class="nav-link" aria-current="page" href="/contact-list"><i class="fas fa-users fa-lg"></i> Contact List</a>
-      </li>`).insertBefore("#loginListItem");
+        <a id="contactListLink" class="nav-link" aria-current="page" href="contact-list.html"><i class="fas fa-users fa-lg"></i> Contact List</a>
+      </li>`).insertBefore("#login");
       
-      }
-      else
-      {
-        // swap out the login link for logout
-        $("#loginListItem").html(
-         ` <a id="login" class="nav-link" aria-current="page"><i class="fas fa-sign-in-alt"></i> Login</a>`
-          );
       }
     }
 
@@ -419,9 +411,7 @@
 
             case "404":
               return display404();
-        default:
-          console.error("ERROR: callback does not exist: " + activeLink);
-          break;
+        
         }
     }
 

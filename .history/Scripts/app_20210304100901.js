@@ -420,7 +420,7 @@
             case "404":
               return display404();
         default:
-          console.error("ERROR: callback does not exist: " + activeLink);
+          console.log("ERROR: callback does not exist")
           break;
         }
     }

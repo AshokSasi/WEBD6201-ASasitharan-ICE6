@@ -106,5 +106,5 @@ if(router.Find(route) > -1)
 }
 else
 {
-    router.ActiveLink ="404";
+    router.ActiveLink ="/404";
 }
